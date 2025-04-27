@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Task } from '../types';
+import { Task as TaskType } from '../types';
+import OneTask from './Task';
 
 const TaskListWrapper = styled.div`
   display: flex;
@@ -9,11 +10,11 @@ const TaskListWrapper = styled.div`
 `;
 
 const TaskList: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<TaskType[]>([]);
   const [taskText, setTaskText] = useState<string>('');
 
   const addTask = (text: string) => {
-    const newTask: Task = {
+    const newTask: TaskType = {
       id: tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
       text,
       completed: false,
@@ -37,7 +38,11 @@ const TaskList: React.FC = () => {
   return (
     <TaskListWrapper>
       <h1>To-Do List</h1>
-      <input type="text" value={taskText} onChange={(e) => e.target.value} />
+      <input
+        type="text"
+        value={taskText}
+        onChange={(e) => setTaskText(e.target.value)}
+      />
       <button
         onClick={() => {
           addTask(taskText);
@@ -46,7 +51,7 @@ const TaskList: React.FC = () => {
         Add Task
       </button>
       {tasks.map((task) => (
-        <Task
+        <OneTask
           key={task.id}
           task={task}
           toggleTask={toggleTask}
