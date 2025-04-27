@@ -8,27 +8,30 @@ interface TaskProps {
   removeTask: (id: number) => void;
 }
 
-// const TaskItem = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 0.5rem;
-//   border-bottom: 1px solid #ccc;
-// `;
+const TaskItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 250px;
+`;
 
-const TaskItem = styled.div<{ completed: boolean }>`
+const Item = styled.div<{ completed: boolean }>`
   text-decoration: ${({ completed }) => (completed ? 'line-through' : 'none')};
+  color: ${({ completed }) => (completed ? '#888888' : 'none')};
+  font-weight: ${({ completed }) => (completed ? 'normal ' : '600')};
 `;
 
 const OneTask: React.FC<TaskProps> = ({ task, toggleTask, removeTask }) => {
   return (
-    <TaskItem completed={task.completed}>
+    <TaskItem className="todo-item">
       <input
         type="checkbox"
         checked={task.completed}
         onChange={() => toggleTask(task.id)}
       />
-      {task.text}
+
+      <Item completed={task.completed}>{task.text}</Item>
+
       <button onClick={() => removeTask(task.id)}>Remove</button>
     </TaskItem>
   );
