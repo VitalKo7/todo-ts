@@ -10,6 +10,7 @@ const TaskListWrapper = styled.div`
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   width: 100%;
+  min-width: 300px;
   max-width: 500px;
   display: flex;
   flex-direction: column;
